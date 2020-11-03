@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: com.test.gmail.GmailTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 1, Errors: 0, Skipped: 4, Time elapsed: 1.166 sec <<< FAILURE!
+testSetup(com.test.gmail.GmailTest)  Time elapsed: 0.921 sec  <<< FAILURE!
+java.lang.IllegalStateException: The driver executable does not exist: D:\Gmail\src\test\resources\Driver\chromedriver.exe
+	at com.google.common.base.Preconditions.checkState(Preconditions.java:585)
+	at org.openqa.selenium.remote.service.DriverService.checkExecutable(DriverService.java:146)
+	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:141)
+	at org.openqa.selenium.chrome.ChromeDriverService.access$000(ChromeDriverService.java:35)
+	at org.openqa.selenium.chrome.ChromeDriverService$Builder.findDefaultExecutable(ChromeDriverService.java:159)
+	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:355)
+	at org.openqa.selenium.chrome.ChromeDriverService.createDefaultService(ChromeDriverService.java:94)
+	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:123)
+	at com.test.gmail.GmailTest.testSetup(GmailTest.java:22)
+

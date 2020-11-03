@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test thread-count="5" name="Test(failed)">
+    <classes>
+      <class name="com.test.gmail.GmailTest">
+        <methods>
+          <include name="valid_SendingMail_SameEmail"/>
+          <include name="testSetup"/>
+          <include name="postSignIn"/>
+          <include name="valid_SendingMail_WithoutToAddress"/>
+          <include name="valid_SendingMail_WrongEmailID"/>
+          <include name="openGmailLogin"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.test.gmail.GmailTest -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->
