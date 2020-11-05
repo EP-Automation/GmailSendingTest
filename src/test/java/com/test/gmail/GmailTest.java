@@ -10,23 +10,31 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class GmailTest {
 	
+	// Variable declaration for Webdriver & User Directory
 	WebDriver driver;
-
+	static String userDirectory = System.getProperty("user.dir").replaceAll("\\\\", "/");
+	
 	@BeforeClass
 	public void testSetup()
 	{
-	System.setProperty("webdriver.chrome.driver", "D:\\Selenium\\WorkSpace\\Gmail\\src\\test\\resources\\Driver\\chromedriver\\chromedriver.exe");
+		// getting the chrome driver from the resources folder 
+	System.setProperty("webdriver.chrome.driver", userDirectory + "/src/test/resources/Driver/chromedriver/chromedriver.exe"); 
 	driver=new ChromeDriver();
+	//We can execute this in Heqdless mode
+	//driver= new RemoteWebDriver();
+	//driver = new PhantomJSDriver();
 	driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 	driver.manage().window().maximize();
 
@@ -50,7 +58,7 @@ public class GmailTest {
 	public void valid_SendingMail_SameEmail() throws InterruptedException
 	{
 		
-		//Entering the Username & Password
+	//Entering the Username & Password
     driver.findElement(By.xpath("//input[@type='email']")).sendKeys("ep.automation2020");
     driver.findElement(By.xpath("//div[@class='VfPpkd-RLmnJb']")).click();
     Thread.sleep(2000);
@@ -247,6 +255,48 @@ public class GmailTest {
     
 
 	}
+	
+	/*
+	 * This method validates the Sending mail for without address
+	 */
+
+		
+		@Test(description="This method validates the Sending mail from and To Both are same mail ID ")
+		public void valid_SendingMail_WithoutSubject() throws InterruptedException
+		{
+	    driver.findElement(By.xpath("//input[@type='email']")).sendKeys("ep.automation2020");
+	    driver.findElement(By.xpath("//div[@class='VfPpkd-RLmnJb']")).click();
+	    Thread.sleep(2000);
+		driver.findElement(By.xpath("//input[@type='password']")).sendKeys("Test@123");
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//div[@class='VfPpkd-RLmnJb']")).click();
+		
+		assertTrue(driver.findElement(By.xpath("//div[@role='button']")).isDisplayed());
+		Thread.sleep(2000);
+
+		driver.findElement(By.xpath("//div[@class=\"T-I T-I-KE L3\"]")).click();
+	    // Trying to send the mail for invalid email id
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//img[@class='Hq aUG']")).click();
+		
+		driver.findElement(By.xpath("//textarea[@name='to']")).sendKeys("ep.automation2020@gmail.com");
+	    //driver.findElement(By.xpath("//input[@name='subjectbox']")).sendKeys("SendingTheMailUsingGmail");
+	    driver.findElement(By.xpath("//div[@role='textbox']")).sendKeys("Hi Sir, Hope you doing good");
+	    Thread.sleep(2000);
+	    driver.findElement(By.xpath(" //div[@class='T-I J-J5-Ji aoO v7 T-I-atl L3']")).click();
+	    Thread.sleep(2000);
+	    
+	    
+	  //Verifying the Inbox Mail which has No Subject
+	    
+	    WebElement inboxSubjectText = driver.findElement(By.xpath("//tr[@jsmodel=\"nXDxbd\"]/td[5]/div/div/div/span/span"));
+	    String inboxSubjectName = inboxSubjectText.getText();
+	    System.out.println(inboxSubjectName);
+	    assertEquals("(no subject)", inboxSubjectName);
+	    
+
+		}
+		
 	
 	//Just for Verification to get the current URL using Selenium
 	@AfterMethod

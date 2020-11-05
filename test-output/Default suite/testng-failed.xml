@@ -5,10 +5,10 @@
     <classes>
       <class name="com.test.gmail.GmailTest">
         <methods>
-          <include name="openBrowser"/>
+          <include name="valid_SendingMail_SameEmail"/>
           <include name="testSetup"/>
-          <include name="valid_SendingMail_WrongEmailID"/>
-          <include name="postSignUp"/>
+          <include name="postSignIn"/>
+          <include name="openGmailLogin"/>
           <include name="afterClass"/>
         </methods>
       </class> <!-- com.test.gmail.GmailTest -->
